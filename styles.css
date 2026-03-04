@@ -1,0 +1,52 @@
+/* --- 1. Global Styles & Typography --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 2px solid red; 
+}
+
+body {
+    display: flex;
+    flex-direction: column;  
+    align-items: center;    
+    justify-content: center; 
+    height: 100vh;
+}
+
+.inputs, .display {
+    display: flex;
+    flex-direction: column;
+    width: 50%; /* This is your scale anchor */
+    max-width: 400px;
+    gap: 1vw; 
+}
+
+p {
+    /* Larger font for the display */
+    font-size: 8vw; 
+    text-align: right;
+    padding: 6% 10%;
+}
+
+.top, .inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1vh; 
+    width: 100%;
+}
+
+button {
+    width: 23.5%; 
+    aspect-ratio: 1 / 1; 
+    cursor: pointer;
+    /* Scaled button font - roughly half the size of the display */
+    font-size: 3vw; 
+}
+
+/* Fix for large screens: Stop the font from growing forever */
+@media (min-width: 800px) {
+    p { font-size: 48px; }
+    button { font-size: 24px; }
+}
