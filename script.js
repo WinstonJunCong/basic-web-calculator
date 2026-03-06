@@ -1,10 +1,13 @@
+// --- Config ---
+const toggleColor = "orange"
+
 // --- Operations ---
 
 const operations = {
     "+": (a, b) => a + b,
     "-": (a, b) => a - b,
-    "X": (a, b) => a * b,
-    "/": (a, b) => a / b ? a / b : null,
+    "×": (a, b) => a * b,
+    "÷": (a, b) => a / b ? a / b : null,
 };
 
 function operate(operator, a, b) {
@@ -32,7 +35,7 @@ const convertToPercentage = (arr) => convertToArray(convertToNumber(arr) / 100);
 function assignOperator(valueStr) {
     operator = valueStr;
     for (const [key, btn] of Object.entries(operatorButtons)) {
-        btn.style.backgroundColor = operator === key ? "orange" : "";
+        btn.style.backgroundColor = operator === key ? toggleColor : "";
     }
 }
 
@@ -131,6 +134,12 @@ function handlePercent() {
 }
 
 // --- Display ---
+function fitText() {
+    output.style.fontSize = "";  // reset to CSS-defined size
+    while (output.scrollWidth > output.clientWidth) {
+        output.style.fontSize = parseFloat(getComputedStyle(output).fontSize) * 0.95 + "px";
+    }
+}
 
 function updateDisplay() {
     if (!operator || result !== undefined) {
@@ -148,6 +157,12 @@ function updateDisplay() {
             }
         }
     }
+
+    fitText();
+    // const length = output.innerText.length;
+    // if (length > 12)       output.style.fontSize = "2.25rem";
+    // else if (length > 8)   output.style.fontSize = "2.75rem";
+    // else                   output.style.fontSize = "3rem";
 }
 
 // --- Main click handler ---
@@ -161,7 +176,7 @@ function onClick() {
     else if (buttonClass === "polarity")  handlePolarity();
     else if (buttonText === "=")          handleEquals();
     else if (buttonClass === "operators") handleOperator(buttonText);
-    else if (buttonText === "&")          handleBackspace();
+    else if (buttonText === "⌫")          handleBackspace();
     else if (buttonText === "AC")         handleClear();
     else if (buttonText === "%")          handlePercent();
 
@@ -176,7 +191,15 @@ const output = document.getElementById("output");
 
 for (const button of buttons) {
     button.addEventListener("click", onClick);
+    button.addEventListener("mousedown", () => button.style.backgroundColor = "gray");
+    button.addEventListener("mouseup", () => button.style.backgroundColor = "");
+    button.addEventListener("mouseleave", () => {
+    if (button.style.backgroundColor !== toggleColor) {
+        button.style.backgroundColor = "";
+        }
+    });
     if (button.className === "operators") {
         operatorButtons[button.innerText] = button;
     }
 }
+

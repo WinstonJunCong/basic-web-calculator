@@ -19,14 +19,15 @@ body {
     flex-direction: column;
     width: 50%; /* This is your scale anchor */
     max-width: 400px;
-    gap: 1vw; 
+    gap: 0.75vw; 
 }
 
 p {
     /* Larger font for the display */
-    font-size: 8vw; 
+    font-size: 6vw; 
     text-align: right;
     padding: 6% 10%;
+    white-space: nowrap;
 }
 
 .top, .inner {
@@ -43,6 +44,14 @@ button {
     cursor: pointer;
     /* Scaled button font - roughly half the size of the display */
     font-size: 3vw; 
+    background-color: rgb(221, 220, 220);
+    border-radius: 6px;
+    border-style: none;
+}
+
+
+.highlight {
+    background-color: grey;
 }
 
 /* Fix for large screens: Stop the font from growing forever */
